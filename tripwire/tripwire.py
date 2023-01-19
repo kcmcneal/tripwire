@@ -20,7 +20,7 @@ import os
 from datetime import datetime
 import hashlib
 
-def tripwireDir(directory, record, c):
+def tripwireDir():
     directory = input("Which directory is being evaluated?  ")
     record = input("What is the name of the record file?  ")
     c = #create - I haven't set this up yet
@@ -98,5 +98,5 @@ def hashFile():
                             break
                         fileHash.update(data)
                     print(f'{file_path}: {fileHash.hexdigest()}')
-
+tripwireDir()
 hashFile()
