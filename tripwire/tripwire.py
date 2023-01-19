@@ -21,6 +21,9 @@ from datetime import datetime
 import hashlib
 
 def tripwireDir(directory, record, c):
+    directory = input("Which directory is being evaluated?  ")
+    record = input("What is the name of the record file?  ")
+    c = #create - I haven't set this up yet
     # Open the file in read mode
     with open(directory, "r") as file:
         # Read the contents of the file
