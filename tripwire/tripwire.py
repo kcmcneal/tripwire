@@ -54,7 +54,11 @@ def tripwireDir():
         # open changes_log in append mode and write new changes
         with open(record, "a") as file:
             file.write(changes_log_contents)
-
+    hashFile()
+    
+#everything below handles the hashing of files: 
+    
+    
 #read target content and return a hash result using a hash algorithm
 # such as:    fileHash = hashlib.md5(data).hexdigest()import hashlib
 def hashFile():
@@ -99,4 +103,3 @@ def hashFile():
                         fileHash.update(data)
                     print(f'{file_path}: {fileHash.hexdigest()}')
 tripwireDir()
-hashFile()
