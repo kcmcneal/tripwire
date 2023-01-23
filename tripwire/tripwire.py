@@ -23,7 +23,7 @@ import hashlib
 def tripwireDir():
     directory = input("Which directory is being evaluated?  ")
     record = input("What is the name of the record file?  ")
-    c = #create - I haven't set this up yet
+    
     # Open the file in read mode
     with open(directory, "r") as file:
         # Read the contents of the file
@@ -58,7 +58,6 @@ def tripwireDir():
     
 #everything below handles the hashing of files: 
     
-    
 #read target content and return a hash result using a hash algorithm
 # such as:    fileHash = hashlib.md5(data).hexdigest()import hashlib
 def hashFile():
@@ -67,11 +66,7 @@ def hashFile():
     # Open the file in read mode 
            
 # check if the target input is a file or a directory   
-
-# this handles the case where the target is a file:   
-    if  os.path.isfile(target): 
-        with open(target, 'rb') as f:
-            data = f.read()   
+    def hashing():
     # Create a new hash object using the specified algorithm
         if algorithm == "sha256":
             fileHash = hashlib.sha256(data)
@@ -81,25 +76,22 @@ def hashFile():
             fileHash = hashlib.sha1(data)
         else:
             raise ValueError(f"Invalid algorithm: {algorithm}")
-        print(fileHash)
+        print(f'{file_path}: {fileHash.hexdigest()}')
+        while True:
+            data = f.read(1024)
+            if not data:
+                break
+        fileHash.update(data)     
+# this handles the case where the target is a file:   
+    if  os.path.isfile(target): 
+        with open(target, 'rb') as f:
+            data = f.read() 
+            hashing()  
 # this handles the case where the target is a directory:
     elif os.path.isdir(target):
         for root, dirs, files in os.walk(target):
             for file in files:
                 file_path = os.path.join(root, file)
                 with open(file_path, 'rb') as f:
-                    if algorithm == "sha256":
-                        fileHash = hashlib.sha256()
-                    elif algorithm == "md5":
-                        fileHash = hashlib.md5()
-                    elif algorithm == "sha1":
-                        fileHash = hashlib.sha1()
-                    else:
-                        raise ValueError(f"Invalid algorithm: {algorithm}")
-                    while True:
-                        data = f.read(1024)
-                        if not data:
-                            break
-                        fileHash.update(data)
-                    print(f'{file_path}: {fileHash.hexdigest()}')
+                    hashing()
 tripwireDir()
